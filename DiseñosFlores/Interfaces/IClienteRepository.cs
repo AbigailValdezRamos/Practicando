@@ -8,6 +8,6 @@ namespace DiseñosFlores.Interfaces
         void Add(Cliente cliente);
         void Update(Cliente cliente);
         void Delete(int id);
-        List<Cliente> GetAll(string nroDocumento = "");
+        List<Cliente> GetAll(string razonSocial = "", string direccion = "", string departamento = "");
     }
 }

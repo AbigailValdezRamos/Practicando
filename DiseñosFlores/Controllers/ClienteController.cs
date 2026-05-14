@@ -16,9 +16,15 @@ namespace DiseñosFlores.Controllers
             _depService = depService;
         }
 
-        public IActionResult Index(string nroDocumento = "")
+        public IActionResult Index(string razonSocial = "", string direccion="" , string departamento ="")
         {
-            var lista = _service.Listar(nroDocumento);
+            var lista = _service.Listar(razonSocial,direccion,departamento);
+
+            ViewBag.Departamentos = new SelectList(
+                _depService.Listar(),
+                "NombreDepartamento",
+                "NombreDepartamento"
+            );
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest") //Identifica si la solicitud fue un AJAX
             {

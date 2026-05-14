@@ -23,10 +23,13 @@
     </div>
 
     <div class="mb-3">
-        <input type="text"
-               id="txtDepartamento"
-               class="form-control"
-               />
+        <select id="txtDepartamento" class="form-control">
+            <option value="">-- Seleccione Departamento --</option>
+            @foreach (var d in ViewBag.Departamentos)
+            {
+                <option value="@d.Value">@d.Text</option>
+            }
+        </select>
     </div>
 
     <div id="contenedorTabla">
@@ -36,31 +39,40 @@
 </div>
 
 @section Scripts {
-
     <script>
+        async function filtrar() {
 
-        const txtRazonSocial = document.getElementById("txtRazonSocial");
+            const razon = document.getElementById("txtRazonSocial").value;
+            const direccion = document.getElementById("txtDireccion").value;
+            const departamento = document.getElementById("txtDepartamento").value;
 
-        txtRazonSocial.addEventListener("keydown", async function (e) {
+            const response = await fetch(`/Cliente/Index?razonSocial=${razon}&direccion=${direccion}&departamento=${departamento}`, {
+                method: "GET",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            });
 
-            if (e.key === "Enter") {
+            const html = await response.text();
+            document.getElementById("contenedorTabla").innerHTML = html;
+        }
 
-                const RazonSocial = txtRazonSocial.value;
+        // ENTER en razón social
+        document.getElementById("txtRazonSocial")
+            .addEventListener("keydown", e => {
+                if (e.key === "Enter") filtrar();
+            });
 
-                const response = await fetch(`/Cliente/Index?nroDocumento=${RazonSocial}`, {
-                    method: "GET",
-                    headers: {
-                        "X-Requested-With": "XMLHttpRequest"
-                    }
-                });
+        // ENTER en dirección
+        document.getElementById("txtDireccion")
+            .addEventListener("keydown", e => {
+                if (e.key === "Enter") filtrar();
+            });
 
-                const html = await response.text();
-
-                document.getElementById("contenedorTabla").innerHTML = html;
-            }
-
-        });
-
+        // ENTER en departamento
+        document.getElementById("txtDepartamento")
+            .addEventListener("change", () => {
+            filtrar();
+            });
     </script>
-
 }

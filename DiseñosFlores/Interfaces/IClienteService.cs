@@ -9,6 +9,6 @@ namespace DiseñosFlores.Interfaces
         void Crear(Cliente cli);
         void Editar(Cliente cli);
         void Eliminar(int id);
-        List<Cliente> Listar(string nroDocumento = "");
+        List<Cliente> Listar(string razonSocial = "", string direccion="" , string departamento ="");
     }
 }

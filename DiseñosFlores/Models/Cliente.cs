@@ -8,7 +8,7 @@ namespace DiseñosFlores.Models
         public int IdCliente { get; set; }
         public string TipoDocumento { get; set; }
 
-
+         
         [Display(Name = "Nro documento")]
         [Required(ErrorMessage = "El {0} es requerido")]
         public string? NroDocumento { get; set; }

@@ -8,28 +8,39 @@
     <input type="hidden" asp-for="IdCliente" />
 
     <div class="mb-2">
-        <label>Tipo Documento</label>
-        <input type="text" asp-for="TipoDocumento" class="form-control" />
+        <label asp-for="TipoDocumento"></label>
+        <select asp-for="TipoDocumento" class="form-control" id="TipoDocumento">
+            <option value="">Seleccione</option>
+            <option value="DNI">DNI</option>
+            <option value="RUC">RUC</option>
+        </select>
+        <span asp-validation-for="TipoDocumento" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
-        <label>Nro Documento</label>
-        <input type="text" asp-for="NroDocumento" class="form-control" />
+        <label asp-for="NroDocumento"></label>
+        @*<label>Nro Documento</label> *@
+        <input asp-for="NroDocumento" class="form-control" />
+        @*<input name="NroDocumento" value="" id="NroDocumento" /> *@
+        <span asp-validation-for="NroDocumento" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
-        <label>Razón Social</label>
-        <input type="text" asp-for="RazonSocial" class="form-control" />
+        <label asp-for="RazonSocial"></label>
+        <input asp-for="RazonSocial" class="form-control" />
+        <span asp-validation-for="RazonSocial" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
         <label>Dirección</label>
-        <input type="text" asp-for="Direccion" class="form-control" />
+        <input asp-for="Direccion" class="form-control" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
         <label>Teléfono</label>
-        <input type="text" asp-for="Telefono" class="form-control" />
+        <input asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
@@ -37,6 +48,9 @@
         <select asp-for="IdDepartamento"
                 asp-items="ViewBag.Departamentos"
                 class="form-control">
+
+            <option value="">Seleccione</option>
+
         </select>
     </div>
 
@@ -45,3 +59,28 @@
     </button>
 
 </form>
+@section Scripts {
+    <script>
+        const tipoDoc = document.getElementById("TipoDocumento");
+        const nroDoc = document.getElementById("NroDocumento");
+
+        tipoDoc.addEventListener("change", function () {
+
+            nroDoc.value = "";
+
+            if (this.value === "DNI") {
+                nroDoc.maxLength = 8;
+                nroDoc.placeholder = "Ingrese 8 dígitos";
+            }
+            else if (this.value === "RUC") {
+                nroDoc.maxLength = 11;
+                nroDoc.placeholder = "Ingrese 11 dígitos";
+            }
+            else {
+                nroDoc.maxLength = 20;
+            }
+        });
+
+
+    </script>
+}

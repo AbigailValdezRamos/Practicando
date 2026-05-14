@@ -13,9 +13,9 @@ namespace DiseñosFlores.Services
             _repo = repo;
         }
 
-        public List<Cliente> Listar(string nroDocumento = "")
+        public List<Cliente> Listar(string razonSocial = "", string direccion = "", string departamento = "")
         {
-            return _repo.GetAll(nroDocumento);
+            return _repo.GetAll(razonSocial,direccion,departamento);
         }
 
         public Cliente Obtener(int id)

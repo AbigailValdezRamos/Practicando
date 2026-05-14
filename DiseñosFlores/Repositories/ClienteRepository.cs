@@ -15,7 +15,7 @@ namespace DiseñosFlores.Repositories
             _connectionString = connectionString;
         }
 
-        public List<Cliente> GetAll(string razonSocial = "")
+        public List<Cliente> GetAll(string razonSocial = "", string direccion="", string departamento="")
         {
             var lista = new List<Cliente>();
 
@@ -33,11 +33,18 @@ namespace DiseñosFlores.Repositories
             FROM Clientes c
             INNER JOIN Departamentos d
                 ON c.IdDepartamento = d.IdDepartamento
-            WHERE ( c.RazonSocial LIKE '%' + @razonSocial + '%') ";
+            WHERE (@razonSocial = '' OR c.RazonSocial LIKE '%' + @razonSocial + '%')
+                    AND
+                    (@direccion = '' OR c.Direccion LIKE '%' + @direccion + '%')
+                    AND
+                    (@departamento = '' OR d.NombreDepartamento = @departamento)";
 
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new   SqlCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
+                cmd.Parameters.AddWithValue("@direccion", direccion);
+                cmd.Parameters.AddWithValue("@departamento", departamento);
+                
 
                 conn.Open();   
 
