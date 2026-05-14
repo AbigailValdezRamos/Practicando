@@ -1,0 +1,10 @@
+﻿@model Departamento
+
+<h2>Eliminar</h2>
+
+<p>¿Seguro que quieres eliminar @Model.NombreDepartamento?</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="IdDepartamento" />
+    <button type="submit">Eliminar</button>
+</form>

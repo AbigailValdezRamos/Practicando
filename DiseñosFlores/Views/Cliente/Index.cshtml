@@ -1,0 +1,66 @@
+﻿@model List<Cliente>
+
+<h2 class="bg-danger">Clientes</h2>
+
+<a asp-controller="Cliente" asp-action="Create">Nuevo</a>
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">Clientes</h2>
+
+    <div class="mb-3">
+        <input type="text"
+               id="txtRazonSocial"
+               class="form-control"
+               placeholder="Buscar por Razon Social y presione Enter" />
+    </div>
+
+    <div class="mb-3">
+        <input type="text"
+               id="txtDireccion"
+               class="form-control"
+               placeholder="Buscar por Direccion y presione Enter" />
+    </div>
+
+    <div class="mb-3">
+        <input type="text"
+               id="txtDepartamento"
+               class="form-control"
+               />
+    </div>
+
+    <div id="contenedorTabla">
+        @await Html.PartialAsync("_TablaClientes", Model) <!--Vista parcial-->
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script>
+
+        const txtRazonSocial = document.getElementById("txtRazonSocial");
+
+        txtRazonSocial.addEventListener("keydown", async function (e) {
+
+            if (e.key === "Enter") {
+
+                const RazonSocial = txtRazonSocial.value;
+
+                const response = await fetch(`/Cliente/Index?nroDocumento=${RazonSocial}`, {
+                    method: "GET",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                });
+
+                const html = await response.text();
+
+                document.getElementById("contenedorTabla").innerHTML = html;
+            }
+
+        });
+
+    </script>
+
+}

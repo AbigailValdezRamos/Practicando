@@ -1,0 +1,47 @@
+﻿@model Cliente
+
+<h2>Editar Cliente</h2>
+
+<form asp-controller="Cliente" asp-action="Edit" method="post">
+
+    <!-- Invisible -->
+    <input type="hidden" asp-for="IdCliente" />
+
+    <div class="mb-2">
+        <label>Tipo Documento</label>
+        <input type="text" asp-for="TipoDocumento" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Nro Documento</label>
+        <input type="text" asp-for="NroDocumento" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Razón Social</label>
+        <input type="text" asp-for="RazonSocial" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Dirección</label>
+        <input type="text" asp-for="Direccion" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Teléfono</label>
+        <input type="text" asp-for="Telefono" class="form-control" />
+    </div>
+
+    <div class="mb-2">
+        <label>Id Departamento</label>
+        <select asp-for="IdDepartamento"
+                asp-items="ViewBag.Departamentos"
+                class="form-control">
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Guardar
+    </button>
+
+</form>

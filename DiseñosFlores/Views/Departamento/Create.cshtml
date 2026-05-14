@@ -1,0 +1,9 @@
+﻿@model Departamento
+
+<h2>Crear</h2>
+
+<form asp-controller="Departamento" asp-action="Create" method="post">
+    <label>Nombre</label>
+    <input asp-for="NombreDepartamento" />
+    <button type="submit">Guardar</button>
+</form>

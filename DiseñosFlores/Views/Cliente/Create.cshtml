@@ -1,0 +1,85 @@
+﻿@model Cliente
+
+<h2>Crear Cliente</h2>
+
+<form asp-controller="Cliente" asp-action="Create" method="post">
+
+    <div class="mb-2">
+        <label asp-for="TipoDocumento"></label>
+        <select asp-for="TipoDocumento" class="form-control" id="TipoDocumento">
+            <option value="">Seleccione</option>
+            <option value="DNI">DNI</option>
+            <option value="RUC">RUC</option>
+        </select>
+        <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label asp-for="NroDocumento"></label>
+        @*<label>Nro Documento</label> *@
+        <input asp-for="NroDocumento" class="form-control" />
+        @*<input name="NroDocumento" value="" id="NroDocumento" /> *@
+        <span asp-validation-for="NroDocumento" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label asp-for="RazonSocial"></label>
+        <input asp-for="RazonSocial" class="form-control" />
+        <span asp-validation-for="RazonSocial" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>Dirección</label>
+        <input asp-for="Direccion" class="form-control" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>Teléfono</label>
+        <input asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>Id Departamento</label>
+        <select asp-for="IdDepartamento"
+                asp-items="ViewBag.Departamentos"
+                class="form-control">
+
+            <option value="">Seleccione</option>
+
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Guardar
+    </button>
+
+</form>
+
+
+@section Scripts {
+    <script>
+        const tipoDoc = document.getElementById("TipoDocumento");
+        const nroDoc = document.getElementById("NroDocumento");
+
+        tipoDoc.addEventListener("change", function () {
+
+            nroDoc.value = "";
+
+            if (this.value === "DNI") {
+                nroDoc.maxLength = 8;
+                nroDoc.placeholder = "Ingrese 8 dígitos";
+            }
+            else if (this.value === "RUC") {
+                nroDoc.maxLength = 11;
+                nroDoc.placeholder = "Ingrese 11 dígitos";
+            }
+            else {
+                nroDoc.maxLength = 20;
+            }
+        });
+
+        
+    </script>
+}

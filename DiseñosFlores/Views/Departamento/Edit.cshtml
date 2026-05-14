@@ -1,0 +1,10 @@
+﻿@model Departamento
+
+<h2>Editar</h2>
+
+<form asp-controller="Departamento" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdDepartamento" /> <!--Hidden es invisible-->
+    <input type ="text" asp-for="NombreDepartamento" />
+    <button type="submit">Guardar</button>
+</form>
+
