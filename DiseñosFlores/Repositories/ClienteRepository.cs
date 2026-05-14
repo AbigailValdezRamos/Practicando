@@ -39,7 +39,7 @@ namespace DiseñosFlores.Repositories
 
                 cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
 
-                conn.Open(); 
+                conn.Open();   
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
